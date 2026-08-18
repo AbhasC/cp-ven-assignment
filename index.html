@@ -8,12 +8,16 @@
       if ("scrollRestoration" in history) {
         history.scrollRestoration = "manual";
       }
-      window.scrollTo(0, 0);
       window.addEventListener("load", () => {
-        const topClone = document.querySelector("[data-infinite-top]");
-        if (topClone) {
-          window.scrollTo(0, topClone.getBoundingClientRect().height);
-        }
+        const resetScroll = () => {
+          const topClone = document.querySelector("[data-infinite-top]");
+          if (topClone) {
+            window.scrollTo(0, topClone.getBoundingClientRect().height);
+          }
+        };
+        resetScroll();
+        requestAnimationFrame(resetScroll);
+        setTimeout(resetScroll, 100);
       });
     </script>
     <title>cap-ven-assgn</title>

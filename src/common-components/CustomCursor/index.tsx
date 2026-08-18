@@ -9,6 +9,11 @@ export const CustomCursor = () => {
   const lensRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const isTouchOnly =
+      navigator.maxTouchPoints > 0 &&
+      window.matchMedia("(pointer: coarse)").matches &&
+      !window.matchMedia("(pointer: fine)").matches;
+    if (isTouchOnly) return;
     const cursor = cursorRef.current;
     const mark = markRef.current;
     const wave = waveRef.current;
