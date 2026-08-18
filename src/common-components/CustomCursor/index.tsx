@@ -8,11 +8,12 @@ export const CustomCursor = () => {
   const waveRef = useRef<HTMLDivElement>(null);
   const lensRef = useRef<HTMLDivElement>(null);
 
+  const isTouchOnly =
+    navigator.maxTouchPoints > 0 &&
+    window.matchMedia("(pointer: coarse)").matches &&
+    !window.matchMedia("(pointer: fine)").matches;
+
   useEffect(() => {
-    const isTouchOnly =
-      navigator.maxTouchPoints > 0 &&
-      window.matchMedia("(pointer: coarse)").matches &&
-      !window.matchMedia("(pointer: fine)").matches;
     if (isTouchOnly) return;
     const cursor = cursorRef.current;
     const mark = markRef.current;
@@ -154,6 +155,8 @@ export const CustomCursor = () => {
       style.remove();
     };
   }, []);
+
+  if (isTouchOnly) return null;
 
   return (
     <>
